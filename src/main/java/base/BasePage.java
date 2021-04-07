@@ -4,6 +4,8 @@ import net.serenitybdd.core.exceptions.NoSuchElementException;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
+import org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,14 +41,14 @@ public class BasePage extends PageObject {
     }
 
     public void type(String locator, String value) {
-        waitFor(getElement(locator)).sendKeys(value);
+        waitFor(getElement(locator)).type(value);
     }
 
     public String getText(String locator) {
         return waitFor(getElement(locator)).getText();
     }
 
-    public String getAttributeVale(String locator, String attributeName) {
+    public String getAttributeValue(String locator, String attributeName) {
         return waitFor(getElement(locator)).getAttribute(attributeName);
     }
 
@@ -55,8 +57,18 @@ public class BasePage extends PageObject {
         withAction().moveToElement(moveTo).perform();
     }
 
-    public void rightClick(String locator){
-        withAction().contextClick(getElement(locator)).perform();
+    public void assertTextEquals(String locator, String expectedText) {
+        String actualText = getText(locator);
+        Assert.assertEquals(actualText + " and " + expectedText + "texts are not equal!",
+                actualText, expectedText);
+    }
+
+    public Boolean isElementDisplay(String locator) {
+        return getElement(locator).isPresent();
+    }
+
+    public void assertTrue(boolean expected, String message){
+        Assert.assertTrue(message,expected);
     }
 
     private By getBy(String locator) {
