@@ -3,15 +3,21 @@ package base;
 import net.serenitybdd.core.exceptions.NoSuchElementException;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.apache.commons.io.FileUtils;
+
+import org.apache.commons.httpclient.util.URIUtil;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.junit.Assert;
-import org.junit.Assert.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.io.File;
-import java.io.FileWriter;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.methods.HeadMethod;
+import org.apache.commons.lang.time.StopWatch;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,13 +73,45 @@ public class BasePage extends PageObject {
         return getElement(locator).isPresent();
     }
 
-    public void assertTrue(boolean expected, String message){
-        Assert.assertTrue(message,expected);
+    public void assertTrue(boolean expected, String message) {
+        Assert.assertTrue(message, expected);
+    }
+
+    public String getPageUrl() {
+        return getDriver().getCurrentUrl();
+    }
+
+    public void navigateSelectedUrl(String url) {
+        openAt(url);
+    }
+
+    public String getUrlStatus(String url) {
+        StopWatch watch = new StopWatch();
+        String status;
+        if (!url.isEmpty()) {
+            try {
+                watch.start();
+                final String GET_RESPONSE_CODE_SCRIPT =
+                        "var xhr = new XMLHttpRequest();" +
+                                "xhr.open('GET', arguments[0], false);" +
+                                "xhr.send(null);" +
+                                "return xhr.status";
+                status = evaluateJavascript(GET_RESPONSE_CODE_SCRIPT,url).toString();
+            } finally {
+                watch.stop();
+            }
+            return status + " Load time :" + watch.toString();
+        }
+        return "Url Null!";
+    }
+
+    public void scrollToEndOfPage(){
+        getDriver().manage().window().fullscreen();
+        evaluateJavascript("window.scrollBy(0,1000)");
     }
 
     private By getBy(String locator) {
         By by = null;
-
         try {
             if (locator.startsWith("id=")) {
                 locator = locator.substring(3);
