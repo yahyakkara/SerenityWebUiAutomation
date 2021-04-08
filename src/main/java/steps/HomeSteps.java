@@ -1,7 +1,5 @@
 package steps;
 
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Step;
 import pages.HomePage;
 import pages.LoginPage;
@@ -18,25 +16,45 @@ public class HomeSteps {
     }
 
     @Step("Verifying home screen is opened")
-    public void checkHomeIsOpen(){
+    public void checkHomeIsOpen() {
         home.verifyHomePageOpen();
     }
 
     @Step("Navigating login screen")
-    public LoginPage navigateToLoginPage(){
+    public LoginPage navigateToLoginPage() {
         home.moveToUserInitialIcon();
         home.clickToLoginButton();
         return loginPage;
     }
 
     @Step("Closing homepage-popup if is displayed")
-    public void closeHomePopUp(){
+    public void closeHomePopUp() {
         home.closeFancyBoxIfDisplayed();
     }
 
     @Step("Checking first name and surname on the menu")
-    public void checkUserName(String nameAndSurname){
+    public void checkUserName(String nameAndSurname) {
         home.moveToUserInitialIcon();
         home.checkUserName(nameAndSurname);
+    }
+
+    @Step("Opening selected boutique page with all boutique")
+    public void navigateToPageWithAllBoutique(String url) {
+        String fitUrl;
+
+        if (url.contains("Home")) {
+            fitUrl = url.replace("Home", "");
+        } else {
+            fitUrl = url;
+        }
+        home.navigateSelectedUrl(fitUrl);
+    }
+
+
+    @Step("Checking Boutique reliability and saving in a file")
+    public void saveBoutiqueInformation(String fileName, String pCount) {
+        home.getAllBoutiquesUrlBasicInfo();
+        home.getAllBoutiquesUrlImageUrl(pCount);
+        home.saveBoutiqueInformationToFile(fileName);
     }
 }
