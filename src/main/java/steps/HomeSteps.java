@@ -22,7 +22,6 @@ public class HomeSteps {
 
     @Step("Navigating login screen")
     public LoginPage navigateToLoginPage() {
-        home.moveToUserInitialIcon();
         home.clickToLoginButton();
         return loginPage;
     }
@@ -56,5 +55,8 @@ public class HomeSteps {
         home.getAllBoutiquesUrlBasicInfo();
         home.getAllBoutiquesUrlImageUrl(pCount);
         home.saveBoutiqueInformationToFile(fileName);
+        String currentWorkingDir = System.getProperty("user.dir");
+        home.attachDataToReportFromFile(currentWorkingDir+"/"+fileName+"Information.csv",fileName+".CSV");
     }
+
 }

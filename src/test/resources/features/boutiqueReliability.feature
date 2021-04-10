@@ -1,3 +1,4 @@
+@Boutique @Performance
 Feature: Boutique reliability
   As a user I want list boutique with smoothly
 
@@ -7,7 +8,13 @@ Feature: Boutique reliability
     And user update Boutique information in a file "<PageUrl>""<PCount>"
     Examples:
       | PageUrl                | PCount |
-      | Home                   | 50     |
-      | /butik/liste/erkek     | 50     |
-      | /butik/liste/cocuk     | 50     |
       | /butik/liste/ev--yasam | 50     |
+
+  @Manual
+  @Manual:Passed
+  @manual-last-tested:sprint-1
+  Scenario: Boutique details should be valid
+    Given Boutique url's status code Test result is created
+    Then tester reads Boutique status and permormance information
+    And Boutique status should be 200
+    And Boutique performance should be valid
