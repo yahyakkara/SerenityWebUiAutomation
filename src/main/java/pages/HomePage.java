@@ -1,14 +1,10 @@
 package pages;
 
-import Utilities.CsvHelper;
+import Utils.CsvUtils;
 import base.BasePage;
-import io.cucumber.java.sl.In;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +25,6 @@ public class HomePage extends BasePage {
     }
 
     public void clickToLoginButton() {
-        // navigateSelectedUrl(getPageUrl() + "giris?");
         moveToUserInitialIcon();
         sleep(1000);
         click(loginButton);
@@ -88,11 +83,14 @@ public class HomePage extends BasePage {
                 writeText += typ + "\n" +
                         "*---------------------------------------------------------------------------------------*" + "\n";
             }
-            // Serenity.recordReportData().withTitle(writeText);
-            Serenity.recordReportData().withTitle(boutiqueName + " Status :  " + boutiqueStatus + " Image : " + imageStatus).andContents(writeText);
+
+            Serenity.recordReportData().withTitle(
+                    boutiqueName + " Status :  " +
+                    boutiqueStatus +
+                    " Image : " + imageStatus).andContents(writeText);
             recordList.add(record);
         }
         String[] headerList = {"Id", "Name", "Url", "Boutique Status", "Boutique Image Url", "Image Status"};
-        CsvHelper.writeCsvFile(fileName + "Information.csv", headerList, recordList);
+        CsvUtils.writeCsvFile(fileName + "Information.csv", headerList, recordList);
     }
 }

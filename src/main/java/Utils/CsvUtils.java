@@ -1,4 +1,4 @@
-package Utilities;
+package Utils;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvHelper {
+public class CsvUtils {
 
     public static void writeCsvFile(String fileName, String[] headerList, List<String[]> recordList) {
         List<String[]> csvData = createCsvData(headerList,recordList);

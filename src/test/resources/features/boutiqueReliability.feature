@@ -8,7 +8,8 @@ Feature: Boutique reliability
     And user update Boutique information in a file "<PageUrl>""<PCount>"
     Examples:
       | PageUrl                | PCount |
-      | Home                   |        |
+      | /butik/liste/ev--yasam | 50     |
+
 
   @Manual
   @Manual:Passed
