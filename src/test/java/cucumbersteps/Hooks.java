@@ -12,6 +12,6 @@ public class Hooks {
 
     @After
     public void testEnd(){
-        System.out.println("Test is end");
+        System.out.println("Test is finished");
     }
 }

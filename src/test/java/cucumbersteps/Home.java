@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 public class Home {
+
     @Steps
     HomeSteps home;
 
@@ -44,13 +45,15 @@ public class Home {
     @Given("Boutique url's status code Test result is created")
     public void boutique_url_s_status_code_test_result_is_created() {
     }
+
     @Then("tester reads Boutique status and permormance information")
     public void test_read_boutique_status_and_permormance_information() {
-
     }
+
     @Then("Boutique status should be {int}")
     public void boutique_status_should_be(Integer int1) {
     }
+
     @Then("Boutique performance should be valid")
     public void boutique_performance_should_be_valid() {
     }

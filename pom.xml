@@ -14,7 +14,7 @@
         <serenity.cucumber.version>2.3.33</serenity.cucumber.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <serenity.runner>RunCuke</serenity.runner>
+        <serenity.runner>TestRunner</serenity.runner>
         <parallel.tests>1</parallel.tests>
         <webdriver.base.url>https://trendyol.com</webdriver.base.url>
         <encoding>UTF-8</encoding>
