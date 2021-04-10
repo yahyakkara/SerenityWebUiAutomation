@@ -14,7 +14,7 @@ import java.util.List;
 
 public class HomePage extends BasePage {
     String userInitialIcon = "css=i[class='i-user initial-icon']";
-    String loginButton = "css=div[class='login-button']";
+    String loginButton = "css=.login-button";
     String fancyBoxClose = "css=a[title='Close']";
     String userName = "css=.user-name";
     String browsingHomePage = "css=#browsing-gw-homepage";
@@ -29,6 +29,9 @@ public class HomePage extends BasePage {
     }
 
     public void clickToLoginButton() {
+        // navigateSelectedUrl(getPageUrl() + "giris?");
+        moveToUserInitialIcon();
+        sleep(1000);
         click(loginButton);
     }
 
@@ -80,6 +83,13 @@ public class HomePage extends BasePage {
             String boutiqueStatus = getUrlStatus(boutiqueUrl);
             String imageStatus = getUrlStatus(boutiqueImage);
             String[] record = {boutiqueId, boutiqueName, boutiqueUrl, boutiqueStatus, boutiqueImage, imageStatus};
+            String writeText = "";
+            for (String typ : record) {
+                writeText += typ + "\n" +
+                        "*---------------------------------------------------------------------------------------*" + "\n";
+            }
+            // Serenity.recordReportData().withTitle(writeText);
+            Serenity.recordReportData().withTitle(boutiqueName + " Status :  " + boutiqueStatus + " Image : " + imageStatus).andContents(writeText);
             recordList.add(record);
         }
         String[] headerList = {"Id", "Name", "Url", "Boutique Status", "Boutique Image Url", "Image Status"};

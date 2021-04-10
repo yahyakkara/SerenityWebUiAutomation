@@ -1,25 +1,19 @@
 package base;
 
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.exceptions.NoSuchElementException;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-import org.apache.commons.httpclient.util.URIUtil;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.lang.time.StopWatch;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class BasePage extends PageObject {
@@ -43,11 +37,11 @@ public class BasePage extends PageObject {
     }
 
     public void click(String locator) {
-        waitForCondition().until(ExpectedConditions.elementToBeClickable(getElement(locator))).click();
+        waitForCondition().until(ExpectedConditions.elementToBeClickable(getBy(locator))).click();
     }
 
     public void type(String locator, String value) {
-        waitFor(getElement(locator)).type(value);
+        waitForCondition().until(ExpectedConditions.visibilityOfElementLocated(getBy(locator))).sendKeys(value);
     }
 
     public String getText(String locator) {
@@ -59,12 +53,13 @@ public class BasePage extends PageObject {
     }
 
     public void mouseMovement(String locator) {
-        WebElement moveTo = waitFor(getElement(locator));
-        withAction().moveToElement(moveTo).perform();
+        //WebElement moveTo = waitFor(getElement(locator));
+        withAction().moveToElement(find(getBy(locator))).perform();
     }
 
     public void assertTextEquals(String locator, String expectedText) {
-        String actualText = getText(locator);
+        WebElement element = waitFor(getElement(locator));
+        String actualText =   waitForCondition().until(ExpectedConditions.visibilityOfElementLocated(getBy(locator))).getText();
         Assert.assertEquals(actualText + " and " + expectedText + "texts are not equal!",
                 actualText, expectedText);
     }
@@ -90,13 +85,14 @@ public class BasePage extends PageObject {
         String status;
         if (!url.isEmpty()) {
             try {
+                sleep(1000);
                 watch.start();
                 final String GET_RESPONSE_CODE_SCRIPT =
                         "var xhr = new XMLHttpRequest();" +
                                 "xhr.open('GET', arguments[0], false);" +
                                 "xhr.send(null);" +
                                 "return xhr.status";
-                status = evaluateJavascript(GET_RESPONSE_CODE_SCRIPT,url).toString();
+                status = evaluateJavascript(GET_RESPONSE_CODE_SCRIPT, url).toString();
             } finally {
                 watch.stop();
             }
@@ -105,9 +101,28 @@ public class BasePage extends PageObject {
         return "Url Null!";
     }
 
-    public void scrollToEndOfPage(){
+    public void scrollToEndOfPage() {
         getDriver().manage().window().fullscreen();
         evaluateJavascript("window.scrollBy(0,1000)");
+    }
+
+    public void attachDataToReportFromFile(String path, String title) {
+        Path generatedReport = Paths.get(path);
+
+        try {
+            Serenity.recordReportData().withTitle(title)
+                    .downloadable().fromFile(generatedReport);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sleep(long mills) {
+        try {
+            Thread.sleep(mills);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private By getBy(String locator) {

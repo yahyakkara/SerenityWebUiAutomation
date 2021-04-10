@@ -1,3 +1,4 @@
+@Login @Smoke
 Feature: Login functions
   As user I want to login the web site
 
@@ -18,6 +19,7 @@ Feature: Login functions
       | mail0020@gmail.com       |          | Lütfen şifrenizi giriniz.                  |
       |                          | 123456   | Lütfen geçerli bir e-posta adresi giriniz. |
       |                          |          | Lütfen geçerli bir e-posta adresi giriniz. |
+      | failDemo@gmail.com       | 123456   | Hatalı örnek                               |
 
 
   Scenario: Success Login

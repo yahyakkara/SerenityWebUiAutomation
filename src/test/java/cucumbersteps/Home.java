@@ -1,9 +1,18 @@
 package cucumbersteps;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.core.webdriver.RemoteDriver;
 import net.thucydides.core.annotations.Steps;
 import steps.HomeSteps;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 public class Home {
     @Steps
@@ -27,7 +36,22 @@ public class Home {
 
     @Then("user update Boutique information in a file {string}{string}")
     public void user_update_boutique_information_in_a_file(String fileName, String pCount) {
-        String fitFileName = fileName.replaceAll("/butik/liste/","");
-        home.saveBoutiqueInformation(fitFileName, pCount);
+        String browserName = RemoteDriver.of(getDriver()).getCapabilities().getBrowserName();
+        String fitFileName = fileName.replaceAll("/butik/liste/", "");
+        home.saveBoutiqueInformation(browserName + "-" + fitFileName, pCount);
+    }
+
+    @Given("Boutique url's status code Test result is created")
+    public void boutique_url_s_status_code_test_result_is_created() {
+    }
+    @Then("tester reads Boutique status and permormance information")
+    public void test_read_boutique_status_and_permormance_information() {
+
+    }
+    @Then("Boutique status should be {int}")
+    public void boutique_status_should_be(Integer int1) {
+    }
+    @Then("Boutique performance should be valid")
+    public void boutique_performance_should_be_valid() {
     }
 }

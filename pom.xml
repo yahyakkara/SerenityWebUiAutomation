@@ -14,6 +14,9 @@
         <serenity.cucumber.version>2.3.33</serenity.cucumber.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <serenity.runner>RunCuke</serenity.runner>
+        <parallel.tests>1</parallel.tests>
+        <webdriver.base.url>https://trendyol.com</webdriver.base.url>
         <encoding>UTF-8</encoding>
     </properties>
 
@@ -62,7 +65,12 @@
             <version>2.3.33</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-zalenium</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -115,5 +123,89 @@
 
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <includes>
+                        <include>**/*${serenity.runner}*.java</include>
+                        <include>**/features/**/SD*.java</include>
+                        <include>**/features/**/*SD.java</include>
+                        <include>**/features/**/*Steps.java</include>
+                        <include>**/features/**/*StepDef.java</include>
+                    </includes>
+                    <systemProperties>
+                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                    </systemProperties>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>resources</additionalClasspathElement>
+                    </additionalClasspathElements>
+                    <parallel>classes</parallel>
+                    <threadCount>${parallel.tests}</threadCount>
+                    <forkCount>${parallel.tests}</forkCount>
+                    <perCoreThreadCount>true</perCoreThreadCount>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.maven.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.serenity-bdd</groupId>
+                        <artifactId>serenity-core</artifactId>
+                        <version>${serenity.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.temyers</groupId>
+                <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>generateRunners</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>generateRunners</goal>
+                        </goals>
+                        <configuration>
+                            <glue>
+                                <package>cucumbersteps</package>
+                            </glue>
+                            <tags>
+                                <!--<tag>@smoke</tag>-->
+                            </tags>
+                            <namingScheme>pattern</namingScheme>
+                            <namingPattern>CucumberSerenityBDDParallelRunner{c}</namingPattern>
+                            <parallelScheme>FEATURE</parallelScheme>
+                            <customVmTemplate>src/test/resources/features/cucumber-serenity-runner.vm</customVmTemplate>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
