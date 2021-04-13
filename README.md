@@ -1,9 +1,9 @@
 # Serenity BDD Automation Test With Zalenium Docker Grid
-This project is built with Cucumber, Serenity, Junit and Selenium. Also used Docker and Zalenium for Grid structure
+Project has been developed by using Cucumber, Serenity, Junit, Selenium tools and Docker,  Zalenium for Grid structure.
 
 ## Installation
 **Docker**
-Tests are very easy to install and deploy in a Docker container.
+Docker container includes everything needed to run an application: code, runtime, system tools, system libraries and settings so that users can easily install and deploy their tests.
 ```sh
 docker info
 docker pull elgalu/selenium
@@ -47,9 +47,9 @@ mvn clean verify -Dserenity.runner=ParallelRunner -Dwebdriver.driver=chrome -Den
 
 
 ## Success Cases
-- Data driven Boutique image and status status
+- Data driven Boutique image and status
 - Data driven Login cases
-- Parallel crosss browser
+- Parallel cross browser
 - Zalenium with Selenium grid docker
 - Reporting
 
