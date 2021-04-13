@@ -42,6 +42,7 @@ mvn clean verify -Dserenity.runner=ParallelRunner -Dwebdriver.driver=chrome -Den
 - Reports
     -         Watch test live and historical :  http://localhost:4444/dashboard/# 
     -         Report ui : /SerenityWebUiAutomation/target/site/serenity/index.html
+    -         Boutique csv = Download from /SerenityWebUiAutomation/target/site/serenity/index.html or check project folder
     -         Grid panel :  http://localhost:4444/console
 ***
 
