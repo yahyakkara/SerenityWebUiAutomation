@@ -7,8 +7,8 @@ Feature: Boutique reliability
     When user is listed all Boutique on "<PageUrl>" with "<PCount>"
     And user update Boutique information in a file "<PageUrl>""<PCount>"
     Examples:
-      | PageUrl                | PCount |
-      | /butik/liste/ev--yasam | 50     |
+      | PageUrl               | PCount |
+      | butik/liste/ev--yasam | 50     |
 
 
   @Manual

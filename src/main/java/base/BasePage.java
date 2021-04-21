@@ -5,11 +5,12 @@ import net.serenitybdd.core.exceptions.NoSuchElementException;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.apache.commons.lang.time.StopWatch;
+
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -36,6 +37,11 @@ public class BasePage extends PageObject {
         return null;
     }
 
+    public void refreshPage(){
+        sleep(1000);
+        getDriver().navigate().refresh();
+    }
+
     public void click(String locator) {
         waitForCondition().until(ExpectedConditions.elementToBeClickable(getBy(locator))).click();
     }
@@ -59,8 +65,8 @@ public class BasePage extends PageObject {
 
     public void assertTextEquals(String locator, String expectedText) {
         WebElement element = waitFor(getElement(locator));
-        String actualText =   waitForCondition().until(ExpectedConditions.visibilityOfElementLocated(getBy(locator))).getText();
-        Assert.assertEquals(actualText + " and " + expectedText + "texts are not equal!",
+        String actualText =   waitForCondition().until(ExpectedConditions.presenceOfElementLocated(getBy(locator))).getText();
+        Assert.assertEquals(actualText + " and " + expectedText + " texts are not equal!",
                 actualText, expectedText);
     }
 

@@ -4,6 +4,7 @@ import Utils.CsvUtils;
 import base.BasePage;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.Cookie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class HomePage extends BasePage {
         mouseMovement(userInitialIcon);
     }
 
+
     public void clickToLoginButton() {
         moveToUserInitialIcon();
         sleep(1000);
@@ -33,8 +35,10 @@ public class HomePage extends BasePage {
     public void closeFancyBoxIfDisplayed() {
         if (isElementDisplay(fancyBoxClose)) {
             click(fancyBoxClose);
+            System.out.println("Clik");
         }
     }
+
 
     public void checkUserName(String nameAndSurname) {
         assertTextEquals(userName, nameAndSurname);

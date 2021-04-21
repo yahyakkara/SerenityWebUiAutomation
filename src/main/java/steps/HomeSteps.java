@@ -11,7 +11,7 @@ public class HomeSteps {
     @Step("Navigating to www.trendyol.com website homePage")
     public HomeSteps navigate() {
         home.open();
-        home.closeFancyBoxIfDisplayed();
+        home.refreshPage();
         return this;
     }
 
