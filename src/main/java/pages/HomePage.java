@@ -1,13 +1,6 @@
 package pages;
 
-import Utils.CsvUtils;
 import base.BasePage;
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.Cookie;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomePage extends BasePage {
     String userInitialIcon = "css=i[class='i-user initial-icon']";
@@ -15,11 +8,6 @@ public class HomePage extends BasePage {
     String fancyBoxClose = "css=a[title='Close']";
     String userName = "css=.user-name";
     String browsingHomePage = "css=#browsing-gw-homepage";
-    String boutiqueContainer = "css=article[class='component-item'] a";
-    String boutiqueImage = "css=article[class='component-item'] span[class='image-container'] img";
-    String boutiqueUrlAttribute = "href";
-    String boutiqueIdAttribute = "data-id";
-
 
     public void moveToUserInitialIcon() {
         mouseMovement(userInitialIcon);

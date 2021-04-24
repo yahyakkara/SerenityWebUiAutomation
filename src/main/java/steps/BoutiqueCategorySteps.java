@@ -3,7 +3,7 @@ package steps;
 import net.thucydides.core.annotations.Step;
 import pages.BoutiqueCategoryPage;
 
-public class BoutiqueListSteps {
+public class BoutiqueCategorySteps {
     BoutiqueCategoryPage boutiqueCategoryPage;
 
     @Step("Opening selected boutique page with all boutique")
