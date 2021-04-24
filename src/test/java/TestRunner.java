@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features="src/test/resources/features", plugin = {"pretty"})
+@CucumberOptions(features="src/test/resources/features", plugin = {"pretty"}, tags = "@Performance")
 public class TestRunner {
 
 }
