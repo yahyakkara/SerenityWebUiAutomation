@@ -42,6 +42,16 @@ public class Home {
         home.saveBoutiqueInformation(browserName + "-" + fitFileName, pCount);
     }
 
+    @Given("user is on home page")
+    public void user_is_on_home_page() {
+        home.navigate();
+    }
+
+    @When("user clicks on Sign in button from header")
+    public void user_clicks_on_sign_in_button_from_header() {
+        home.navigateToLoginPage();
+    }
+
     @Given("Boutique url's status code Test result is created")
     public void boutique_url_s_status_code_test_result_is_created() {
     }

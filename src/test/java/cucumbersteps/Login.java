@@ -15,15 +15,6 @@ public class Login {
     @Steps
     LoginSteps login;
 
-    @Given("user is on home page")
-    public void user_is_on_home_page() {
-        home.navigate();
-    }
-
-    @When("user clicks on Sign in button from header")
-    public void user_clicks_on_sign_in_button_from_header() {
-        home.navigateToLoginPage();
-    }
 
     @Then("user is displayed login page")
     public void user_is_displayed_login_page() {
