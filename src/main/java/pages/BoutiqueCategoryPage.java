@@ -41,6 +41,7 @@ public class BoutiqueCategoryPage extends BasePage {
         for (int i = 0; i < boutiqueInfoList.size(); i++) {
             WebElementFacade boutiqueInfo = boutiqueInfoList.get(i);
             WebElementFacade boutiqueImageUrl = boutiqueImageList.get(i);
+
             String boutiqueId = boutiqueInfo.getAttribute(boutiqueIdAttribute);
             String boutiqueName = boutiqueInfo.getText();
             String boutiqueUrl = boutiqueInfo.getAttribute(boutiqueUrlAttribute);

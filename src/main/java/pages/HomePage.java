@@ -23,7 +23,6 @@ public class HomePage extends BasePage {
     public void closeFancyBoxIfDisplayed() {
         if (isElementDisplay(fancyBoxClose)) {
             click(fancyBoxClose);
-            System.out.println("Clik");
         }
     }
 

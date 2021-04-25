@@ -1,9 +1,7 @@
 package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import net.serenitybdd.core.Serenity;
 import net.thucydides.core.webdriver.DriverSource;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

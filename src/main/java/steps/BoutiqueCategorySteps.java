@@ -24,6 +24,7 @@ public class BoutiqueCategorySteps {
         boutiqueCategoryPage.getAllBoutiquesUrlImageUrl(pCount);
         boutiqueCategoryPage.saveBoutiqueInformationToFile(fileName);
         String currentWorkingDir = System.getProperty("user.dir");
-        boutiqueCategoryPage.attachDataToReportFromFile(currentWorkingDir+"/"+fileName+"Information.csv",fileName+".csv");
+        boutiqueCategoryPage.attachDataToReportFromFile(currentWorkingDir+"/"+fileName+"Information.csv",
+                fileName+".csv");
     }
 }
