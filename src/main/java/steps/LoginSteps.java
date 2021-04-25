@@ -1,9 +1,6 @@
 package steps;
 
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Step;
-import pages.HomePage;
 import pages.LoginPage;
 
 public class LoginSteps {

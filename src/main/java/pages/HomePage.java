@@ -13,7 +13,6 @@ public class HomePage extends BasePage {
         mouseMovement(userInitialIcon);
     }
 
-
     public void clickToLoginButton() {
         moveToUserInitialIcon();
         sleep(1000);
